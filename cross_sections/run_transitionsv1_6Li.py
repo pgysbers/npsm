@@ -103,10 +103,10 @@ if verbose:
     print("target bound states (J, pi, T, num, E)")
     print(target_bound_states)
 
-##Chloe Modif
+# bound states of the projectile nucleus
 proj_states=cross_sections_utils.get_proj_state_info(ncsmc_rgm_out_file)
 if verbose:
-    print("projectile  states (ichan,ist,J, pi, T, E)")  
+    print("projectile  states (ichan, ist, J, pi, T, E)")  
     print(proj_states)
 
 

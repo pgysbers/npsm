@@ -184,8 +184,47 @@ def get_resultant_state_info(rgm_out_filename, verbose=False):
         J2 = str(int(float(J) * 2))
         T2 = str(int(float(T) * 2))
         state_titles[i] = " ".join([J2, p, T2])
+        print(J2,J,T2)
     return state_titles
 
+def get_proj_state_info(rgm_out_filename):
+    with open(rgm_out_filename, "r+") as rgm_out_file:
+        text = rgm_out_file.read()
+    # I assume all hunks of relevant info look something like this:
+    # chann,2*J,2*T,parity=
+
+    regex = r'number of channels=[ ]*([0-9]*)'
+    match = re.findall(regex, text)
+    Nchan=match[0]
+    regex = r'chann,2\SJ,2\ST,parity=[ ]*([0-9]*)[ ]*([0-9]*)[ ]*([0-9]*)[ ]*(-?[0-9]*)'    
+    matches = re.findall(regex, text)
+    regex=r'state \#[ ]([0-9])*[ ]*energy=[ ]*(-?[.0-9]*).*'
+    matchstates = re.findall(regex, text)
+    Nst=0
+    ii=0
+    for matchst in matchstates:
+        ist=int(float(matchst[0]))
+        if ist > Nst :
+            Nst=int(float(matchst[0]))
+        ii=ii+1
+        
+    states=[]
+    iimin=0
+    iimax=Nst    
+    for match in matches:
+        ichan=int(float(match[0]))
+        J2 = int(float(match[1]))
+        T2 = int(float(match[2]))
+        parity = int(float(match[3]))
+        for matchst in matchstates[iimin:iimax]: 
+            ist=int(float(matchst[0]))
+            energy=float(matchst[1])   
+            states.append([ichan,ist,J2,parity,T2,energy])    
+        iimin=iimin+Nst
+        iimax=iimax+Nst
+    for state in states:
+       print(state)
+    return states
 
 def get_target_state_info(rgm_out_filename):
     with open(rgm_out_filename, "r+") as rgm_out_file:
@@ -218,8 +257,8 @@ def get_target_state_info(rgm_out_filename):
         else:
             nums[num_string] += 1
         states.append([J2, parity, T2, nums[num_string], energy])
-    #for state in states:
-    #    print(state)
+    for state in states:
+        print(state)
 
     # Format: 2J, parity, 2T, num, binding energy. First entry = ground state.
     # I'm pretty sure that the first state will always be the ground state,
