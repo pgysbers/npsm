@@ -74,7 +74,7 @@ ncsmc_out_dir = f"{input_dir}"
 # put them in this list (if list is empty, we'll run them all)
 # format of each entry should be a string, "2J +/-1 2T"
 #resultant_states_manual = ["2 -1 2"]
-result_states_manual = []
+resultant_states_manual = []
 
 # stop editing here unless you have weirdly named ncsmc output
 ncsmc_rgm_out_file = join(ncsmc_out_dir, f"ncsm_rgm_Am2_1_1_{run_name}.out")
