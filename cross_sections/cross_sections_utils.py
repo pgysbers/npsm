@@ -223,7 +223,7 @@ def get_proj_state_info(rgm_out_filename):
         iimin=iimin+Nst
         iimax=iimax+Nst
     for state in states:
-       print(state)
+        print('projectile state:',state)
     return states
 
 def get_target_state_info(rgm_out_filename):
@@ -258,7 +258,7 @@ def get_target_state_info(rgm_out_filename):
             nums[num_string] += 1
         states.append([J2, parity, T2, nums[num_string], energy])
     for state in states:
-        print(state)
+        print('target state:',state)
 
     # Format: 2J, parity, 2T, num, binding energy. First entry = ground state.
     # I'm pretty sure that the first state will always be the ground state,
