@@ -7,34 +7,8 @@ import dot_in
 import os
 import re
 import cross_sections_utils
+import yaml
 
-desired_states = ["1 -1 3", "3 -1 3"]
-"""resultant nucleus states we care about, 2J, pi, 2T"""
-
-pn_mode = True
-"""ignore isospin quantum numbers"""
-# (the transitions code will use proton and neutron components individually)
-
-transitions = ["E1", "E2", "M1"]
-"""transitions we care about"""
-
-run_name = "nLi8_n3lo-NN3Nlnl-srg2.0_20_Nmax6"
-"""this variable is for naming of output files"""
-
-
-observ_files = [
-    "/Users/callum/Desktop/npsm/_Nmax6_ncsmc_output/Li9_observ_Nmax6_Jz1",
-    "/Users/callum/Desktop/npsm/_Nmax6_ncsmc_output/Li9_observ_Nmax7_Nmax6_Jz1"
-]
-"""paths to observ.out files for resultant nucleus"""
-
-ncsd_file = "/home/callum/ncsd/Li9_n3lo-NN3Nlnl-srg2.0_Nmax8.20"
-"""path to ncsd output file for resultant nucleus"""
-
-nmax = 8
-
-A, _ = cross_sections_utils.get_A_Z("Li8")
-ncsmc_rgm_out_file = join(ncsmc_out_dir, f"ncsm_rgm_Am2_1_1.out_{run_name}")
 
 def transition_parameter(trans_str):
     """
@@ -136,7 +110,8 @@ def get_radii(ncsd_file, nmax, state):
 
 
 def make_ncsm_e1(desired_states, transitions, run_name,
-                 observ_files, ncsd_file, nmax, out_dir=None,
+                 observ_files, ncsd_file, nmax, out_dir=".",
+                 ncsmc_rgm_out_file='ncsm_rgm_Am2_1_1.out',
                  pn_mode=False, A=None, verbose=False):
     """
     Makes NCSM_E1_Afi.dat files for the given parameters.
@@ -346,7 +321,28 @@ def make_ncsm_e1(desired_states, transitions, run_name,
             print('wrote', out_path)
 
 
+def parse_yaml(yaml_file):
+    with open(yaml_file) as f:
+        try:
+            params = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            print(e)
+    if 'nucleus' in params.keys():
+        params['A'], _ = cross_sections_utils.get_A_Z(params['nucleus'])
+        print(f'Nucleus input, A set to {params["A"]}')
+    if 'ncsmc_rgm_out_file' not in params.keys():
+        params['ncsmc_rgm_out_file'] = f'{params["input_dir"]}/ncsm_rgm_Am2_1_1.out_{params["run_name"]}'
+    return params
+
 if __name__ == "__main__":
+    params = parse_yaml('params.yml')
     make_ncsm_e1(
-        desired_states, transitions, run_name, observ_files, ncsd_file, nmax,
-        out_dir="", pn_mode=pn_mode, A=A, verbose=True)
+        params['desired_states'],
+        params['transitions'],
+        params['run_name'],
+        params['observ_files'],
+        params['ncsd_file'],
+        params['nmax'],
+        ncsmc_rgm_out_file=params['ncsmc_rgm_out_file'],
+        pn_mode=params['pn_mode'],
+        A=params['A'], verbose=True)

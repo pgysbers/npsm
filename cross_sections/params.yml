@@ -1,0 +1,26 @@
+# name for output files
+run_name: 'Be8_Nmax9'
+# specify A or convert from nucleus name
+nucleus: 'Be8'
+A: 8
+# directory to find input files
+input_dir: '/home/peter/Research/X17/Nmax 9/Nmax 9 - 2p/input_files'
+observ_files:
+   - 'observ.Be8_Nmax8..1bd'
+   - 'observ.Be8_Nmax8..Jz1'
+   - 'observ.Be8_Nmax8_Nmax9..'
+   - 'observ.Be8_Nmax8_Nmax9 Jz1'
+ncsd_file: 'Be8_n3lo-NN3Nlnl-srg2.0_Nmax0-10.20'
+# resultant nucleus states "2J pi 2T"
+desired_states:
+   - '0 1 0'
+   - '4 1 0'
+# electromagnetic multipoles
+transitions:
+   - 'E1'
+   - 'M1'
+   - 'E2'
+# NCSMC Nmax (for even parities)
+nmax: 8
+# if True: ignore the isospin quantum numbers (everything will be labeled T=0)
+pn_mode: True
