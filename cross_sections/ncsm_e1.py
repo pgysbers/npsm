@@ -7,8 +7,9 @@ import dot_in
 import os
 import re
 import cross_sections_utils
+from os.path import join
 
-desired_states = ["1 -1 3", "3 -1 3"]
+desired_states = ["4 1 0"]
 """resultant nucleus states we care about, 2J, pi, 2T"""
 
 pn_mode = True
@@ -18,22 +19,27 @@ pn_mode = True
 transitions = ["E1", "E2", "M1"]
 """transitions we care about"""
 
-run_name = "nLi8_n3lo-NN3Nlnl-srg2.0_20_Nmax6"
+run_name = "pLi7_n3lo-NN3Nlnl-srg2.0_20_Nmax8_pheno"
 """this variable is for naming of output files"""
 
+ncsmc_out_dir = "/home/peter/Research/npsm/input_files/"
 
 observ_files = [
-    "/Users/callum/Desktop/npsm/_Nmax6_ncsmc_output/Li9_observ_Nmax6_Jz1",
-    "/Users/callum/Desktop/npsm/_Nmax6_ncsmc_output/Li9_observ_Nmax7_Nmax6_Jz1"
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8.20_15st_1bd"),
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8.20_15st_Jz1_1bd"),
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8_Nmax9.20_1bd"),
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8_Nmax9.20_Jz1_1bd"),
 ]
 """paths to observ.out files for resultant nucleus"""
 
-ncsd_file = "/home/callum/ncsd/Li9_n3lo-NN3Nlnl-srg2.0_Nmax8.20"
+ncsd_file = "/home/peter/Research/npsm/input_files/Be8_n3lo-NN3Nlnl-srg2.0_Nmax0-10.20"
 """path to ncsd output file for resultant nucleus"""
 
 nmax = 8
 
-A, _ = cross_sections_utils.get_A_Z("Li8")
+ncsmc_out_dir = "/home/peter/Research/ncsmc_run/run_8_9-pheno/"
+
+A, _ = cross_sections_utils.get_A_Z("Be8")
 ncsmc_rgm_out_file = join(ncsmc_out_dir, f"ncsm_rgm_Am2_1_1.out_{run_name}")
 
 def transition_parameter(trans_str):

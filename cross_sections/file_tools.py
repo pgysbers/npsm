@@ -333,10 +333,12 @@ def make_wf_file(wavefunction_NCSMC_file, res_state, run_dir):
 
     # now pick which segment to save by comparing J, parity, T
     J2, parity, T2 = map(int, res_state.split())
+    print(J2, parity, T2)
     the_chosen_one = None
     for segment in segments:
         first_line = segment[0]
         seg_J2, seg_parity, seg_T2 = map(int, first_line.split()[1:])
+        print(seg_J2, seg_parity, seg_T2)
         if J2 == seg_J2 and parity == seg_parity and T2 == seg_T2:
             the_chosen_one = segment
     assert the_chosen_one is not None

@@ -26,49 +26,47 @@ run_executables = False
 # NOTE: some parameters are set by default, in dot_in.py! E.g. matching radius
 
 # full path to ncsd output for target nucleus (so we can get Rp, Rn, Rm):
-ncsd_file_target = "/home/callum/Documents/npsm/input_files/petr_files/Be7_NNn4lo500_3NlnlcD-1.8cE-0.3_E71.8-srg2.0_Nmax0-10.20"
-ncsd_file_resultant = "/home/callum/Documents/npsm/input_files/petr_files/B8_NNn4lo500_3NlnlcD-1.8cE-0.3_E71.8-srg2.0_Nmax0-8.20_5st"
+ncsd_file_target = "/home/peter/Research/npsm/input_files/Li7_NNn3lo3Nlnl-srg2.0_Nmax0-8.20_10st"
+ncsd_file_resultant = "/home/peter/Research/npsm/input_files/Be8_n3lo-NN3Nlnl-srg2.0_Nmax0-10.20"
 nmax = 8
 
 # path to executable file
-exe_path = "/home/callum/Documents/npsm/input_files/petr_files/transitions_NCSMC.exe"
+exe_path = "/home/peter/Research/transitions_ncsmc/transitions_NCSMC.exe"
 
 # where are your ncsmc output files stored?
-ncsmc_out_dir = "/home/callum/Documents/npsm/input_files/petr_files/"
+ncsmc_out_dir = "/home/peter/Research/npsm/input_files/"
 
 # observ.out files for the resultant nucleus
 resultant_observ_files = [
-    #join(ncsmc_out_dir, "observ.Be7_NNn4lo500_3NlnlcD-1.8cE-0.3_E71.8-srg2.0_Nmax8.20_5st_1bd"),
-    join(ncsmc_out_dir,"observ.B8_n4lo-NN3Nlnl-srg2.0_20_Nmax8_pheno_5st_r2_1bd"),
-    join(ncsmc_out_dir,"observ.B8_n4lo-NN3Nlnl-srg2.0_20_Nmax8_pheno_5st_r2_Jz1_1bd"),
-    join(ncsmc_out_dir,"observ.B8_n4lo-NN3Nlnl-srg2.0_20_Nmax8_Nmax9_pheno_5st_r2_Jz1_1bd"),
-    #join(ncsmc_out_dir, "observ.B8_NNn4lo500_3NlnlcD-1.8cE-0.3_E71.8-srg2.0_Nmax8.20_5st_Jz1_1bd"),
-    #join(ncsmc_out_dir, "observ.B8_NNn4lo500_3NlnlcD-1.8cE-0.3_E71.8-srg2.0_Nmax8_Nmax9.20_5st_Jz1")
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8.20_15st_1bd"),
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8.20_15st_Jz1_1bd"),
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8_Nmax9.20_15st_1bd"),
+    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8_Nmax9.20_Jz1_1bd"),
 ]
 
 # observ.out file for the target nucleus
-target_file = join(ncsmc_out_dir, "observ.Be7_NNn4lo500_3NlnlcD-1.8cE-0.3_E71.8-srg2.0_Nmax8.20_5st_1bd")
+target_file = join(ncsmc_out_dir, "observ.Li7_NNn3lo_3NlnlcD0.7cE-0.06-srg2.0_Nmax8.20_1bd")
 
 # transitions we care about
 transitions_we_want = ["E1", "E2", "M1"]
 
 # this string is contained in input files
-run_name = "pBe7_n4lo-NN3Nlnl-srg2.0_20_Nmax8_pheno"
+run_name = "pLi7_n3lo-NN3Nlnl-srg2.0_20_Nmax8_pheno"
 
 # another string for parts of naming of output files,
 # we'll append "_2J" at the end, e.g. "_1", based on resultant_states
-naming_str = "NCSMC_E1M1E2_B8_{J2}_{T2}"
+naming_str = "NCSMC_E1M1E2_Be8_{J2}_{T2}"
 
 # the projectile we're using, "n", "p", or a list of the form [A, Z, 2J, p, 2T]
 proj = "p"
 
 # more ncsmc output file paths
-ncsmc_out_dir = "/home/callum/Documents/npsm/input_files/petr_files/"
+ncsmc_out_dir = "/home/peter/Research/ncsmc_run/run_8_9-pheno/"
 
 # if you only want to run for some resultant states,
 # put them in this list (if list is empty, we'll run them all)
 # format of each entry should be a string, "2J +/-1 2T"
-resultant_states_manual = ["2 -1 2"]
+resultant_states_manual = ["4 1 0"]
 
 # stop editing here unless you have weirdly named ncsmc output
 ncsmc_rgm_out_file = join(ncsmc_out_dir, f"ncsm_rgm_Am2_1_1.out_{run_name}")
@@ -145,6 +143,8 @@ def make_dir(res_state, verbose=False):
             scattering_wf_NCSMC, join(run_dir, basename(scattering_wf_NCSMC)))
 
     # and finally split up the wavefunction_NCSMC file
+    if verbose:
+        print("making wavefunction_NCSMC file")
     file_tools.make_wf_file(wavefunction_NCSMC, res_state, run_dir)
 
     # then return the executable to be run
@@ -178,6 +178,6 @@ if __name__ == "__main__":
 
     for r_state in r_states:
         # make run directories
-        executable = make_dir(r_state)
+        executable = make_dir(r_state, verbose=True)
         if run_executables:  # then run if desired
             run_exe(executable)
