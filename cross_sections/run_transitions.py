@@ -26,47 +26,47 @@ run_executables = False
 # NOTE: some parameters are set by default, in dot_in.py! E.g. matching radius
 
 # full path to ncsd output for target nucleus (so we can get Rp, Rn, Rm):
-ncsd_file_target = "/home/peter/Research/npsm/input_files/Li7_NNn3lo3Nlnl-srg2.0_Nmax0-8.20_10st"
-ncsd_file_resultant = "/home/peter/Research/npsm/input_files/Be8_n3lo-NN3Nlnl-srg2.0_Nmax0-10.20"
-nmax = 8
+ncsd_file_target = "/home/peter/Research/npsm/input_files_C12-pB11/B11_NNn4lo500_3Nlnl-srg1.8_Nmax0-8.18_IT"
+ncsd_file_resultant = "/home/peter/Research/npsm/input_files_C12-pB11/C12_NNn4lo500_3Nlnl-srg1.8_Nmax0-6.18"
+nmax = 6
 
 # path to executable file
 exe_path = "/home/peter/Research/transitions_ncsmc/transitions_NCSMC.exe"
 
 # where are your ncsmc output files stored?
-ncsmc_out_dir = "/home/peter/Research/npsm/input_files/"
+ncsmc_out_dir = "/home/peter/Research/npsm/input_files_C12-pB11/"
 
 # observ.out files for the resultant nucleus
 resultant_observ_files = [
-    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8.20_15st_1bd"),
-    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8.20_15st_Jz1_1bd"),
-    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8_Nmax9.20_15st_1bd"),
-    join(ncsmc_out_dir,"observ.Be8_n3lo-NN3Nlnl-srg2.0_Nmax8_Nmax9.20_Jz1_1bd"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax7.18_IT_kmin1.5em5_obd-10st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax7-Nmax6.18_IT_kmin1.5em5_obd-10st-9st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-9st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6-Nmax7.18_IT_kmin1.5em5_obd-9st-10st"),
 ]
 
 # observ.out file for the target nucleus
-target_file = join(ncsmc_out_dir, "observ.Li7_NNn3lo_3NlnlcD0.7cE-0.06-srg2.0_Nmax8.20_1bd")
+target_file = join(ncsmc_out_dir, "observ.B11_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-4st")
 
 # transitions we care about
 transitions_we_want = ["E1", "E2", "M1"]
 
 # this string is contained in input files
-run_name = "pLi7_n3lo-NN3Nlnl-srg2.0_20_Nmax8_pheno"
+run_name = "pB11_n4lo500_3Nlnl-srg1.8_20_Nmax10"
 
 # another string for parts of naming of output files,
 # we'll append "_2J" at the end, e.g. "_1", based on resultant_states
-naming_str = "NCSMC_E1M1E2_Be8_{J2}_{T2}"
+naming_str = "NCSMC_E1M1E2_C12_{J2}_{T2}"
 
 # the projectile we're using, "n", "p", or a list of the form [A, Z, 2J, p, 2T]
 proj = "p"
 
 # more ncsmc output file paths
-ncsmc_out_dir = "/home/peter/Research/ncsmc_run/run_8_9-pheno/"
+ncsmc_out_dir = "/home/peter/Research/npsm/input_files_C12-pB11/"
 
 # if you only want to run for some resultant states,
 # put them in this list (if list is empty, we'll run them all)
 # format of each entry should be a string, "2J +/-1 2T"
-resultant_states_manual = ["4 1 0"]
+resultant_states_manual = ["0 1 0"]
 
 # stop editing here unless you have weirdly named ncsmc output
 ncsmc_rgm_out_file = join(ncsmc_out_dir, f"ncsm_rgm_Am2_1_1.out_{run_name}")
