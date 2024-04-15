@@ -42,6 +42,8 @@ resultant_observ_files = [
     join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax7-Nmax6.18_IT_kmin1.5em5_obd-10st-9st"),
     join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-9st"),
     join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6-Nmax7.18_IT_kmin1.5em5_obd-9st-10st"),
+   join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6-Nmax7.18_IT_kmin1.5em5_obd-6st-9st_Jz1"),
+   join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-6st_Jz1"),
 ]
 
 # observ.out file for the target nucleus
@@ -51,7 +53,7 @@ target_file = join(ncsmc_out_dir, "observ.B11_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_ob
 transitions_we_want = ["E1", "E2", "M1"]
 
 # this string is contained in input files
-run_name = "pB11_n4lo500_3Nlnl-srg1.8_20_Nmax10"
+run_name = "pB11_NNn4lo500_3Nlnl-srg1.8_18_Nmax6_pheno"
 
 # another string for parts of naming of output files,
 # we'll append "_2J" at the end, e.g. "_1", based on resultant_states
@@ -66,7 +68,7 @@ ncsmc_out_dir = "/home/peter/Research/npsm/input_files_C12-pB11/"
 # if you only want to run for some resultant states,
 # put them in this list (if list is empty, we'll run them all)
 # format of each entry should be a string, "2J +/-1 2T"
-resultant_states_manual = ["0 1 0"]
+resultant_states_manual = ["0 1 0","4 1 0"]
 
 # stop editing here unless you have weirdly named ncsmc output
 ncsmc_rgm_out_file = join(ncsmc_out_dir, f"ncsm_rgm_Am2_1_1.out_{run_name}")
