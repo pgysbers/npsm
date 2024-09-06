@@ -26,8 +26,8 @@ run_executables = False
 # NOTE: some parameters are set by default, in dot_in.py! E.g. matching radius
 
 # full path to ncsd output for target nucleus (so we can get Rp, Rn, Rm):
-ncsd_file_target = "/home/peter/Research/npsm/input_files_C12-pB11/B11_NNn4lo500_3Nlnl-srg1.8_Nmax0-8.18_IT"
-ncsd_file_resultant = "/home/peter/Research/npsm/input_files_C12-pB11/C12_NNn4lo500_3Nlnl-srg1.8_Nmax0-6.18"
+ncsd_file_target = "/home/peter/Research/npsm/input_files_C12-pB11/B11_NNn4lo500_3NlnlE7-srg2.0_Nmax0-6.18_10st"
+ncsd_file_resultant = "/home/peter/Research/npsm/input_files_C12-pB11/C12_NNn4lo500_3NlnlE7-srg2.0_Nmax0-6.18_13st"
 nmax = 6
 
 # path to executable file
@@ -38,22 +38,26 @@ ncsmc_out_dir = "/home/peter/Research/npsm/input_files_C12-pB11/"
 
 # observ.out files for the resultant nucleus
 resultant_observ_files = [
-    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax7.18_IT_kmin1.5em5_obd-10st"),
-    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax7-Nmax6.18_IT_kmin1.5em5_obd-10st-9st"),
-    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-9st"),
-    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6-Nmax7.18_IT_kmin1.5em5_obd-9st-10st"),
-   join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6-Nmax7.18_IT_kmin1.5em5_obd-6st-9st_Jz1"),
-   join(ncsmc_out_dir,"observ.C12_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-6st_Jz1"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax6.18_13st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax6.18_10st_2_0"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax7.18_10st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax7.18_9st_2_0"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax6_Nmax7.18_13st-10st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax6_Nmax7.18_10st-9st_2_0"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax7_Nmax6.18_10st-13st"),
+    join(ncsmc_out_dir,"observ.C12_NNn4lo500_3NlnlE7-srg2.0_Nmax7_Nmax6.18_9st-10st_2_0")
 ]
 
 # observ.out file for the target nucleus
-target_file = join(ncsmc_out_dir, "observ.B11_NNn4lo500_3Nlnl-srg1.8_Nmax6.18_obd-4st")
+target_file = join(ncsmc_out_dir, "observ.B11_NNn4lo500_3NlnlE7-srg2.0_Nmax6.18_4st")
+#target_file = join(ncsmc_out_dir, "observ.C11_NNn4lo500_3NlnlE7-srg2.0_Nmax6.18_4st")
 
 # transitions we care about
 transitions_we_want = ["E1", "E2", "M1"]
 
 # this string is contained in input files
-run_name = "pB11_NNn4lo500_3Nlnl-srg1.8_18_Nmax6_pheno"
+#run_name = "pB11_NNn4lo500-3NlnlE7-srg2.0_18_Nmax6_pB11-nC11_3m1m5m3m_m10p13"
+run_name = "pB11_NNn4lo500-3NlnlE7-srg2.0_18_Nmax6_pB11-nC11_3m1m5m3m_m10p13_pheno_0-4MeV"
 
 # another string for parts of naming of output files,
 # we'll append "_2J" at the end, e.g. "_1", based on resultant_states
@@ -63,7 +67,8 @@ naming_str = "NCSMC_E1M1E2_C12_{J2}_{T2}"
 proj = "p"
 
 # more ncsmc output file paths
-ncsmc_out_dir = "/home/peter/Research/npsm/input_files_C12-pB11/"
+#ncsmc_out_dir = "/home/peter/Research/npsm/ncsmc_python/C12-pB11/abinitio_E7"
+ncsmc_out_dir = "/home/peter/Research/npsm/ncsmc_python/C12-pB11/pheno_0-4MeV_E7"
 
 # if you only want to run for some resultant states,
 # put them in this list (if list is empty, we'll run them all)
