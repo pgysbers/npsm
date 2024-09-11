@@ -22,6 +22,7 @@ from os.path import join, exists, basename, realpath
 
 verbose = True
 run_executables = False
+pn_mode = True
 
 # NOTE: some parameters are set by default, in dot_in.py! E.g. matching radius
 
@@ -29,6 +30,7 @@ run_executables = False
 ncsd_file_target = "/home/peter/Research/npsm/input_files_C12-pB11/B11_NNn4lo500_3NlnlE7-srg2.0_Nmax0-6.18_10st"
 ncsd_file_resultant = "/home/peter/Research/npsm/input_files_C12-pB11/C12_NNn4lo500_3NlnlE7-srg2.0_Nmax0-6.18_13st"
 nmax = 6
+A, _ = cross_sections_utils.get_A_Z("C12")
 
 # path to executable file
 exe_path = "/home/peter/Research/transitions_ncsmc/transitions_NCSMC.exe"
@@ -126,7 +128,8 @@ def make_dir(res_state, verbose=False):
         print("making NCSM_E1_Afi file")
     ncsm_e1.make_ncsm_e1(
         [res_state], transitions_we_want, run_name, resultant_observ_files,
-        ncsd_file_resultant, nmax, out_dir=run_dir)
+        ncsd_file_resultant, nmax, ncsmc_rgm_out_file, 
+        out_dir=run_dir, pn_mode=pn_mode, A=A, verbose=verbose)
     # make transitions_NCSMC.in file
     n_str = naming_str.format(J2=J2, T2=T2)
     if verbose:
